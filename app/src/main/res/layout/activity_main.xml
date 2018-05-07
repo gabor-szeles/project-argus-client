@@ -9,7 +9,8 @@
     <org.project_argus.project_argus_client.PaintView
         android:id="@+id/paintView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
 
+        />
 
 </android.support.constraint.ConstraintLayout>

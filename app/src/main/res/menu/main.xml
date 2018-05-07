@@ -22,5 +22,10 @@
         app:showAsAction="never"
         android:title="Clear"/>
 
+    <item
+        android:id="@+id/color"
+        app:showAsAction="never"
+        android:title="Open colour picker"/>
+
 
 </menu>
