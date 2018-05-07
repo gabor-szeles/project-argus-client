@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     private PaintView paintView;
@@ -43,8 +45,29 @@ public class MainActivity extends AppCompatActivity {
             case R.id.clear:
                 paintView.clear();
                 return true;
+            case R.id.color:
+                openColorPicker();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void openColorPicker() {
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, PaintView.DEFAULT_COLOR,
+                                            new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                paintView.setCurrentColor(color);
+            }
+        });
+        colorPicker.show();
+    }
+
+
 }

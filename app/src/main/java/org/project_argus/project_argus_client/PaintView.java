@@ -57,6 +57,10 @@ public class PaintView extends View {
         mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
     }
 
+    public void setCurrentColor(int color) {
+        this.currentColor = color;
+    }
+
     public void init(DisplayMetrics metrics) {
         int height = metrics.heightPixels;
         int width = metrics.widthPixels;
