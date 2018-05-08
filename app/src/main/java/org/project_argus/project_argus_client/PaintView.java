@@ -20,7 +20,7 @@ public class PaintView extends View {
 
     public static int BRUSH_SIZE = 20;
     public static final int DEFAULT_COLOR = Color.RED;
-    public static final int DEFAULT_BG_COLOR = Color.WHITE;
+    public static final int DEFAULT_BG_COLOR = Color.TRANSPARENT;
     private static final float TOUCH_TOLERANCE = 4;
     private float mX, mY;
     private Path mPath;
@@ -89,6 +89,8 @@ public class PaintView extends View {
 
     public void clear() {
         backgroundColor = DEFAULT_BG_COLOR;
+        mBitmap.eraseColor(Color.TRANSPARENT);
+        mPath.reset();
         paths.clear();
         normal();
         invalidate();
