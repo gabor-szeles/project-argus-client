@@ -1,26 +1,45 @@
 package org.project_argus.project_argus_client;
 
+import android.graphics.Color;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SurfaceView;
+import android.view.TextureView;
+import android.widget.FrameLayout;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
 
     private PaintView paintView;
+
+    private FrameLayout cameraView;
+
+    private CameraPreview cameraPreview;
+
+    private Camera camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        camera = getCameraInstance();
         paintView = (PaintView) findViewById(R.id.paintView);
+        cameraView = (FrameLayout) findViewById(R.id.cameraView);
+        cameraPreview = new CameraPreview(this, camera);
+        cameraView.addView(cameraPreview);
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         paintView.init(metrics);
+        paintView.bringToFront();
     }
 
     @Override
@@ -67,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         colorPicker.show();
+    }
+
+    /** A safe way to get an instance of the Camera object. */
+    public Camera getCameraInstance(){
+        Camera camera = null;
+        try {
+            camera = Camera.open(); // attempt to get a Camera instance
+        }
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+        }
+        return camera; // returns null if camera is unavailable
     }
 
 
